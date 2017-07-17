@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+</style>
+	<link rel="stylesheet" type="text/css" href="./dragndrop.css">
+	<script src="./dragndrop.js"></script>
+</head>
+<body>
+
+<h2>Drag and Drop</h2>
+<p>Drag the image back and forth between the two div elements.</p>
+
+<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
+	
+</div>
+
+<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)">
+<div class="innerDiv" id="innerBox1" draggable="true" ondragstart="drag(event, 50)" ondragend="dragEnd(event, 50)">Item1</div>
+<div class="innerDiv" id="innerBox2" draggable="true" ondragstart="drag(event, 100)" ondragend="dragEnd(event, 100)">Item2</div>
+<div class="innerDiv" id="innerBox3" draggable="true" ondragstart="drag(event, 150)" ondragend="dragEnd(event, 150)">Item3</div>
+<div class="innerDiv" id="innerBox4" draggable="true" ondragstart="drag(event, 200)" ondragend="dragEnd(event, 200)">Item4</div>
+</div>
+<br>
+<label>Price:</label>
+<input type="text" id="price" value="0"/>
+<label>Tax:</label>
+<input type="text" id="tax" value="0"/>
+<label>Total amount:</label>
+<input type="text" id="totalValue" value="0"/>
+
+</body>
+</html>
