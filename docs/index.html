@@ -1,33 +1,63 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-<style>
-</style>
-	<link rel="stylesheet" type="text/css" href="./dragndrop.css">
-	<script src="./dragndrop.js"></script>
-</head>
-<body>
+<script>
+    function sum(total, value){
+        if(value.length > 1){
+            var typeChecking = value.checkNumType();
+            if(typeChecking)
+                value = value.reduce(sum, 0);
+            else
+                return false;
+        }
+        return total + value;
+    }
 
-<h2>Drag and Drop</h2>
-<p>Drag the image back and forth between the two div elements.</p>
+        Array.prototype.reduce = function reduce(accumulator) {
+            var index = 0, arrayLength = this.length, curr;
 
-<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
-	
-</div>
+            if (arguments.length < 2) {
+                curr = this[0];
+                index = 1;
+            }
+            else {
+                curr = arguments[1];
+            }
+            console.log(this.length);
+            while (index < arrayLength) {
+                if (index in this) {
+                    curr = accumulator.call(null, curr, this[index]);
+                    if(!curr)
+                            break;
+                    ++index;
+                }
+            }
+            return curr;
+        };
 
-<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)">
-<div class="innerDiv" id="innerBox1" draggable="true" ondragstart="drag(event, 50)" ondragend="dragEnd(event, 50)">Item1</div>
-<div class="innerDiv" id="innerBox2" draggable="true" ondragstart="drag(event, 100)" ondragend="dragEnd(event, 100)">Item2</div>
-<div class="innerDiv" id="innerBox3" draggable="true" ondragstart="drag(event, 150)" ondragend="dragEnd(event, 150)">Item3</div>
-<div class="innerDiv" id="innerBox4" draggable="true" ondragstart="drag(event, 200)" ondragend="dragEnd(event, 200)">Item4</div>
-</div>
-<br>
-<label>Price:</label>
-<input type="text" id="price" value="0"/>
-<label>Tax:</label>
-<input type="text" id="tax" value="0"/>
-<label>Total amount:</label>
-<input type="text" id="totalValue" value="0"/>
+    Array.prototype.checkNumType = function() {
+        for(var i=0; i < this.length; i++){
+            if(typeof(this[i]) !== 'number') {
+                alert("All the inputs should be numbers");
+                return false;
+            }
+            return true;
+        }
+    }
 
-</body>
-</html>
+//    var total = [[5,1], [2, 3]].reduce(sum, 0);
+//    console.log(total);
+
+    function messenger(from, message , to, greeting) {
+        return greeting + " " + to + " " +  message + " " + "from " + from;
+    }
+    function naivePartialRight(fn) {
+        var args = Array.prototype.slice.call(arguments,1);
+        return function(){
+            console.log("inner argumnets===", arguments, Array.prototype.slice.call(arguments), args);
+            return fn.apply(this, Array.prototype.slice.call(arguments).concat(args));
+        }
+    }
+    var sendFromGunjan = naivePartialRight(messenger, "hello", "anu", "how are you?");
+    var sendFromMommy = naivePartialRight(messenger, "hello", "mommy", "how are you?");
+    console.log(sendFromMommy("gunjan"));
+
+    
+</script>
